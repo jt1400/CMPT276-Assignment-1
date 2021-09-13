@@ -1,7 +1,33 @@
 package com.example.gamescorecalculator.ui;
 
+import com.example.gamescorecalculator.model.Game;
+import com.example.gamescorecalculator.model.GameManager;
+
 import java.text.DecimalFormat;
 import java.util.Scanner;
+
+/*
+Text UI must repeatedly display a menu with the following choices:
+List known games
+If there are no games yet, state “No games”
+Display all the games, numbering them starting at 1.
+Display each game in the format:
+40 vs 40 vs -12, winner player(s): 1, 2 (@2021-08-31 13:37)
+The score earned by each player, separated by “ vs ”
+Comma separated list of winning players’ numbers (1-indexed).
+Time stamp of when the game was created in format: yyyy-MM-dd HH:mm
+Add a new game
+Ask user for how many player, then for each player record the information about their
+game’s score.
+If the user enters 0 cards were played for a player, then do not ask about points or
+wager cards.
+Remove an existing game
+Display a list of known games (same format as above)
+Ask user to enter a game’s number to delete it.
+Allow user to enter 0 to delete none.
+Exit
+Close the program
+ */
 
 public class TextUI {
 
@@ -15,28 +41,55 @@ public class TextUI {
 
 
     public void showMenu() {
-        // BEGIN SAMPLE USING SCREEN AND KEYBOARD:
-        // (remove this: it's just to show you how to access the screen and keyboard!)
         System.out.println("Menu: \n-------------- " +
                 "\n1. List games " +
                 "\n2. New game " +
-                "\n3.Delete game " +
+                "\n3. Delete game " +
                 "\n0. Exit " +
                 "\n:");
         int menuChoice = in.nextInt();
 
-        System.out.println();
-        System.out.print("Prompt on same line: ");
-        int favNum = in.nextInt();
+        switch(menuChoice){
+            case 1:
+                System.out.println("Games: " + "\n-------------- " + "\n");
+                if(gameManager.numberOfGames() == 0){
+                    System.out.println("   No games");
+                }
+                else{
+                    int i = 1;
+                    for(Game game : gameManager) {
+                        System.out.println(i + ". " + game);
+                    }
+                }
 
-        System.out.println("Printing " + count + " times!");
-        for (int i = 0; i < count; i++) {
-            System.out.println(i + ": Hello world; your favourite number is " + favNum);
+            case 2:
+                System.out.println("Adding game: " + "\n-------------- " + "\n");
+                // code to add game
+
+            case 3:
+                System.out.println("Games: " + "\n-------------- " + "\n");
+                if(gameManager.numberOfGames() == 0){
+                    System.out.println("   No game to delete");
+                }
+                else{
+                    int i = 1;
+                    for(Game game : gameManager) {
+                        System.out.println(i + ". " + game);
+                    }
+
+                    System.out.println("Which game to delete (0 for none)?");
+                    int gameToDelete = in.nextInt() - 1;
+                    if(gameToDelete < 0 ||gameToDelete > gameManager.numberOfGames()){
+                        System.out.println("Invalid value.");
+                    }
+                    else if(gameToDelete == 0){
+                        this.showMenu();
+                    }
+                    gameManager.delete(gameToDelete);
+                }
+
         }
 
-        // END SAMPLE
-
-        // DO NOT HARD-CODE YOUR INTERFACE; DON'T REPEAT YOUR CODE!
     }
 
 }
