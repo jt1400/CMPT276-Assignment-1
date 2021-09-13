@@ -2,9 +2,10 @@ package com.example.gamescorecalculator.ui;
 
 import com.example.gamescorecalculator.model.Game;
 import com.example.gamescorecalculator.model.GameManager;
+import com.example.gamescorecalculator.model.PlayerScore;
 
-import java.text.DecimalFormat;
 import java.util.Scanner;
+
 
 /*
 Text UI must repeatedly display a menu with the following choices:
@@ -30,6 +31,9 @@ Close the program
  */
 
 public class TextUI {
+    private static final int MIN_NUMBER_OF_PLAYERS = 1;
+    private static final int MAX_NUMBER_OF_PLAYERS = 4;
+
 
     private final GameManager gameManager;
     private Scanner in = new Scanner(System.in);// Read from keyboard
@@ -49,11 +53,22 @@ public class TextUI {
                 "\n:");
         int menuChoice = in.nextInt();
 
+        while(menuChoice < 0 || menuChoice > 4){
+            System.out.println("Invalid value.");
+            if(menuChoice < 0){
+                System.out.println("Please enter a value that is 0 or greater.");
+            }
+            else {
+                System.out.println("Please enter a value that is 3 or less.");
+            }
+            menuChoice = in.nextInt();
+        }
+
         switch(menuChoice){
             case 1:
                 System.out.println("Games: " + "\n-------------- " + "\n");
                 if(gameManager.numberOfGames() == 0){
-                    System.out.println("   No games");
+                    System.out.println("\tNo games");
                 }
                 else{
                     int i = 1;
@@ -63,13 +78,62 @@ public class TextUI {
                 }
 
             case 2:
+                int numberOfPlayers;
                 System.out.println("Adding game: " + "\n-------------- " + "\n");
-                // code to add game
+
+                System.out.println("How many players?");
+                numberOfPlayers = in.nextInt();
+
+                while(numberOfPlayers < MIN_NUMBER_OF_PLAYERS || numberOfPlayers > MAX_NUMBER_OF_PLAYERS){
+                    System.out.println("Invalid value.");
+                    if(numberOfPlayers < MIN_NUMBER_OF_PLAYERS){
+                        System.out.println("Please enter a value that is 1 or greater.");
+                    }
+                    else {
+                        System.out.println("Please enter a value that is 4 or less.");
+                    }
+                    numberOfPlayers = in.nextInt();
+                }
+
+                Game game = new Game(numberOfPlayers);
+
+                for(int i = 1; i <= numberOfPlayers; i++){
+                    PlayerScore player = new PlayerScore();
+
+                    System.out.println("Player " + i + "\n\tHow many cards?");
+                    int numberOfCards = in.nextInt();
+
+                    while (numberOfCards < 0){
+                        System.out.println("Invalid value. " +
+                                "\nPlease enter a value that is 0 or greater.");
+                        numberOfCards = in.nextInt();
+                    }
+                    player.setNumberOfCards(numberOfCards);
+
+                    if (numberOfCards == 0){
+                        player.setSumOfCards(0);
+                        player.setNumberOfWagerCards(0);
+                        game.addPlayer(player);
+                        continue;
+                    }
+
+                    System.out.println("\tSum of Cards?");
+                    int sumOfCards = in.nextInt();
+                    player.setSumOfCards(sumOfCards);
+
+                    System.out.println("\tHow many wagers?");
+                    int numberOfWagerCards = in.nextInt();
+                    player.setNumberOfWagerCards(numberOfWagerCards);
+
+                    game.addPlayer(player);
+                }
+
+                System.out.println("Adding game:\n\t" + game);
 
             case 3:
                 System.out.println("Games: " + "\n-------------- " + "\n");
                 if(gameManager.numberOfGames() == 0){
-                    System.out.println("   No game to delete");
+                    System.out.println("\tNo game to delete");
                 }
                 else{
                     int i = 1;
@@ -88,6 +152,12 @@ public class TextUI {
                     gameManager.delete(gameToDelete);
                 }
 
+            case 0:
+                System.out.println("DONE!");
+                break;
+
+            default:
+                this.showMenu();
         }
 
     }

@@ -19,7 +19,30 @@ Calculate the player’s score.
 
 public class PlayerScore {
     private int numberOfCards;
-    private int sumOfPoints;
+    private int sumOfCards;
     private int numberOfWagerCards;
 
+    public void setNumberOfCards(int numberOfCards) {
+        this.numberOfCards = numberOfCards;
+    }
+
+    public void setSumOfCards(int sumOfCards) {
+        this.sumOfCards = sumOfCards;
+    }
+
+    public void setNumberOfWagerCards(int numberOfWagerCards) {
+        this.numberOfWagerCards = numberOfWagerCards;
+    }
+
+    public int getScore() {
+        int score;
+
+        score = (sumOfCards - 20) * (numberOfWagerCards + 1);
+
+        if (numberOfCards >= 8){
+            score += 20;
+        }
+
+        return score;
+    }
 }

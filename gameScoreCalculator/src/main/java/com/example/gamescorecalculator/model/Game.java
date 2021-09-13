@@ -1,6 +1,8 @@
 package com.example.gamescorecalculator.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
 Game: Represents one game played by 1 to 4 players. Also stores the date/time when
@@ -9,21 +11,16 @@ You must use the LocalDateTime class to store its creation date/time.
 Must be able to report which player(s) won
  */
 
-public class Game {
+public class Game{
     private int numberOfPLayer;
     private LocalDateTime localDateTime;
     private int winner;
+    public List<PlayerScore> playerScores = new ArrayList<>();
 
-    public Game(int numberOfPLayer) {
-        this.numberOfPLayer = numberOfPLayer;
+    public Game(int numberOfPLayers) {
+        this.numberOfPLayer = numberOfPLayers;
         this.localDateTime = LocalDateTime.now();
-
-        switch(numberOfPLayer){
-            case 1:
-
         }
-
-    }
 
     public void setWinner(int winner) {
         this.winner = winner;
@@ -35,6 +32,10 @@ public class Game {
 
     public int getWinner() {
         return winner;
+    }
+
+    public void addPlayer(PlayerScore playerScore) {
+        playerScores.add(playerScore);
     }
 
     @Override
