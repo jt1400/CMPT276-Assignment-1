@@ -31,8 +31,6 @@ Close the program
  */
 
 public class TextUI {
-    private static final int MIN_NUMBER_OF_PLAYERS = 1;
-    private static final int MAX_NUMBER_OF_PLAYERS = 4;
 
 
     private final GameManager gameManager;
@@ -78,39 +76,41 @@ public class TextUI {
                 }
 
             case 2:
-                int numberOfPlayers;
                 System.out.println("Adding game: " + "\n-------------- " + "\n");
 
-                System.out.println("How many players?");
-                numberOfPlayers = in.nextInt();
+                Game game = new Game();
 
-                while(numberOfPlayers < MIN_NUMBER_OF_PLAYERS || numberOfPlayers > MAX_NUMBER_OF_PLAYERS){
-                    System.out.println("Invalid value.");
-                    if(numberOfPlayers < MIN_NUMBER_OF_PLAYERS){
-                        System.out.println("Please enter a value that is 1 or greater.");
+                System.out.println("How many players?");
+                int numberOfPlayers = in.nextInt();
+
+                boolean repeat = true;
+                while (repeat) {
+                    try {
+                        game.setNumberOfPLayer(numberOfPlayers);
+                        repeat = false;
+                    } catch (Exception e) {
+                        System.out.println("Invalid value. \n" + e);
                     }
-                    else {
-                        System.out.println("Please enter a value that is 4 or less.");
-                    }
-                    numberOfPlayers = in.nextInt();
                 }
 
-                Game game = new Game(numberOfPlayers);
-
-                for(int i = 1; i <= numberOfPlayers; i++){
+                for(int i = 1; i <= numberOfPlayers; i++) {
                     PlayerScore player = new PlayerScore();
 
                     System.out.println("Player " + i + "\n\tHow many cards?");
                     int numberOfCards = in.nextInt();
 
-                    while (numberOfCards < 0){
-                        System.out.println("Invalid value. " +
-                                "\nPlease enter a value that is 0 or greater.");
-                        numberOfCards = in.nextInt();
+                    repeat = true;
+                    while (repeat) {
+                        try {
+                            player.setNumberOfCards(numberOfCards);
+                            repeat = false;
+                        } catch (Exception e) {
+                            System.out.println("Invalid value. \n" + e);
+                            numberOfCards = in.nextInt();
+                        }
                     }
-                    player.setNumberOfCards(numberOfCards);
 
-                    if (numberOfCards == 0){
+                    if (numberOfCards == 0) {
                         player.setSumOfCards(0);
                         player.setNumberOfWagerCards(0);
                         game.addPlayer(player);
@@ -119,15 +119,31 @@ public class TextUI {
 
                     System.out.println("\tSum of Cards?");
                     int sumOfCards = in.nextInt();
-                    player.setSumOfCards(sumOfCards);
+                    repeat = true;
+                    while (repeat) {
+                        try {
+                            player.setSumOfCards(sumOfCards);
+                        } catch (Exception e) {
+                            System.out.println("Invalid value. \n" + e);
+                            sumOfCards = in.nextInt();
+                        }
+                    }
+
 
                     System.out.println("\tHow many wagers?");
                     int numberOfWagerCards = in.nextInt();
-                    player.setNumberOfWagerCards(numberOfWagerCards);
+                    repeat = true;
+                    while (repeat) {
+                        try {
+                            player.setNumberOfWagerCards(numberOfWagerCards);
+                        } catch (Exception e) {
+                            System.out.println("Invalid value. \n" + e);
+                            numberOfWagerCards = in.nextInt();
+                        }
 
-                    game.addPlayer(player);
+                        game.addPlayer(player);
+                    }
                 }
-
                 System.out.println("Adding game:\n\t" + game);
 
             case 3:
@@ -137,8 +153,8 @@ public class TextUI {
                 }
                 else{
                     int i = 1;
-                    for(Game game : gameManager) {
-                        System.out.println(i + ". " + game);
+                    for(Game g : gameManager) {
+                        System.out.println(i + ". " + g);
                     }
 
                     System.out.println("Which game to delete (0 for none)?");
