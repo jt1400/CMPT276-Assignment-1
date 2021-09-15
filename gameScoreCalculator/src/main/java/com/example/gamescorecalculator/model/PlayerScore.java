@@ -52,6 +52,10 @@ public class PlayerScore {
             score += 20;
         }
 
+        if (numberOfCards == 0){
+            score = 0;
+        }
+
         return score;
     }
 }

@@ -27,6 +27,14 @@ public class GameManager implements Iterable<Game>{
     }
 
     public void delete(int n){
-        games.remove(n);
+        if(n < 0){
+            throw new IllegalArgumentException("Please enter a value that is 0 or greater.");
+        }
+        else if (n > games.size()){
+            throw new IllegalArgumentException("Please enter a value that is" + games.size() + " or less.");
+        }
+        else {
+            games.remove(n - 1);
+        }
     }
 }
