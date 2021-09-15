@@ -52,19 +52,21 @@ public class TextUI {
         while((menuChoice < 0) || (menuChoice > 4)){
             System.out.println("Invalid value.");
             if(menuChoice < 0){
-                System.out.println("Please enter a value that is 0 or greater.");
+                System.out.println("Please enter a value that is 0 or greater.\n:");
             }
             else {
-                System.out.println("Please enter a value that is 3 or less.");
+                System.out.println("Please enter a value that is 3 or less.\n:");
             }
             menuChoice = in.nextInt();
         }
+
+        System.out.println("\n");
 
         switch(menuChoice){
             case 1:
                 System.out.println("Games: " + "\n-------------- ");
                 if(gameManager.numberOfGames() == 0){
-                    System.out.println("\tNo games\n");
+                    System.out.println("\tNo games");
                 }
                 else{
                     int i = 1;
@@ -88,8 +90,9 @@ public class TextUI {
                     try {
                         game.setNumberOfPLayers(numberOfPlayers);
                         repeat = false;
-                    } catch (Exception e) {
-                        System.out.println("Invalid value. \n" + e);
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Invalid value. \n" + e.getMessage() + "\nHow many players?");
+                        numberOfPlayers = in.nextInt();
                     }
                 }
 
@@ -104,8 +107,9 @@ public class TextUI {
                         try {
                             player.setNumberOfCards(numberOfCards);
                             repeat = false;
-                        } catch (Exception e) {
-                            System.out.println("Invalid value. \n" + e);
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Invalid value. \n" + e.getMessage()
+                                    + "\nPlayer " + i + "\n\tHow many cards?");
                             numberOfCards = in.nextInt();
                         }
                     }
@@ -124,8 +128,8 @@ public class TextUI {
                         try {
                             player.setSumOfCards(sumOfCards);
                             repeat = false;
-                        } catch (Exception e) {
-                            System.out.println("Invalid value. \n" + e);
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Invalid value. \n" + e.getMessage() + "\n\tSum of Cards?");
                             sumOfCards = in.nextInt();
                         }
                     }
@@ -138,16 +142,15 @@ public class TextUI {
                         try {
                             player.setNumberOfWagerCards(numberOfWagerCards);
                             repeat = false;
-                        } catch (Exception e) {
-                            System.out.println("Invalid value. \n" + e);
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Invalid value. \n" + e.getMessage() + "\n\tHow many wagers?");
                             numberOfWagerCards = in.nextInt();
                         }
-
-                        game.addPlayer(player);
                     }
+                    game.addPlayer(player);
                 }
                 gameManager.add(game);
-                System.out.println("Adding game:\n\t" + game + "\n");
+                System.out.println("\nAdding game:\n\t" + game + "\n");
                 this.showMenu();
                 break;
 
@@ -176,8 +179,10 @@ public class TextUI {
                             try {
                                 gameManager.delete(gameToDelete);
                                 repeat = false;
-                            } catch (Exception e) {
-                                System.out.println("Invalid value.\n" + e);
+                            } catch (IllegalArgumentException e) {
+                                System.out.println("Invalid value.\n" + e.getMessage()
+                                        + "Which game to delete (0 for none)?");
+                                gameToDelete = in.nextInt();
                             }
                         }
                         System.out.println("Game deleted.\n");
