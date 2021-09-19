@@ -1,16 +1,13 @@
+/*
+Game class
+ */
+
 package com.example.gamescorecalculator.model;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-
-/*
-Game: Represents one game played by 1 to 4 players. Also stores the date/time when
-the Game was created.
-You must use the LocalDateTime class to store its creation date/time.
-Must be able to report which player(s) won
- */
 
 public class Game{
     private static final int MIN_NUMBER_OF_PLAYERS = 1;
@@ -60,6 +57,7 @@ public class Game{
                 winner += ", " + Integer.toString(i + 1);
             }
         }
+
         return winner;
     }
 
@@ -70,14 +68,17 @@ public class Game{
     @Override
     public String toString() {
         StringBuilder gameResult = new StringBuilder();
+
         for (int i = 1; i < numberOfPLayers; i++){
             gameResult.append(" vs ");
             gameResult.append(playerScores.get(i).getScore());
         }
+
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
         String gameResultString = Integer.toString(playerScores.get(0).getScore()) + gameResult.toString();
         gameResultString += ", winner player(s): " + this.getWinner() + " (@" + this.getLocalDateTime().format(format) + ")";
+
         return gameResultString;
     }
 }
