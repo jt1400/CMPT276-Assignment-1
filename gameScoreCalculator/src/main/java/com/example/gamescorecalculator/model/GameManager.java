@@ -1,14 +1,12 @@
+/*
+GameManager class
+*/
+
 package com.example.gamescorecalculator.model;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-/*
-Game manager: Store a collection of games.
-Class must support adding new games, retrieving a specific game by its index, and
-removing a game by its index.
-*/
 
 public class GameManager implements Iterable<Game>{
     private List<Game> games = new ArrayList<>();
@@ -31,7 +29,7 @@ public class GameManager implements Iterable<Game>{
             throw new IllegalArgumentException("Please enter a value that is 0 or greater.");
         }
         else if (n > games.size()){
-            throw new IllegalArgumentException("Please enter a value that is" + games.size() + " or less.");
+            throw new IllegalArgumentException("Please enter a value that is " + games.size() + " or less.");
         }
         else {
             games.remove(n - 1);
