@@ -10,7 +10,11 @@ public class PlayerScore {
     private int numberOfWagerCards;
 
     public void setNumberOfCards(int numberOfCards) {
-        if (numberOfCards < 0){
+        if (numberOfCards == 0){
+            this.setSumOfCards(0);
+            this.setNumberOfWagerCards(0);
+        }
+        else if (numberOfCards < 0){
             throw new IllegalArgumentException("Please enter a value that is 0 or greater.");
         }
 

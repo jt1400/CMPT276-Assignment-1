@@ -38,6 +38,13 @@ class PlayerScoreTest {
     }
 
     @Test
+    void testGetScoreWithZeroCard(){
+        PlayerScore p = new PlayerScore();
+        p.setNumberOfCards(0);
+        assertEquals(0, p.getScore());
+    }
+
+    @Test
     void testSetBadNumberOfCards(){
         PlayerScore p = new PlayerScore();
         assertThrows(IllegalArgumentException.class,

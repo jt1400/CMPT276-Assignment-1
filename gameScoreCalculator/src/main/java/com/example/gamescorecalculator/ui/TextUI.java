@@ -117,8 +117,6 @@ public class TextUI {
                     }
 
                     if (numberOfCards == 0) {
-                        player.setSumOfCards(0);
-                        player.setNumberOfWagerCards(0);
                         game.addPlayer(player);
                         continue;
                     }
