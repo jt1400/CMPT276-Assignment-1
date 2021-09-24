@@ -1,8 +1,8 @@
-/**
- * The GameManager class is used to store a collection of games.
- * This class use an ArrayList to store Games object.
- * This class support adding new games, retrieving a specific Game by its index and removing a
- * game by its index.
+/*
+  The GameManager class is used to store a collection of games.
+  This class use an ArrayList to store Games object.
+  This class support adding new games, retrieving a specific Game by its index and removing a
+  game by its index.
  */
 
 package com.example.gamescorecalculator.model;

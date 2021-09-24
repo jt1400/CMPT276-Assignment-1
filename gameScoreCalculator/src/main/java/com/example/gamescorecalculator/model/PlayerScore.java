@@ -1,7 +1,7 @@
-/**
- * The PlayerScore class is used to represent the score of a single player during a game.
- * This class keep the number of cards, sum of cards and the number of wager cards a player has.
- * This class support getting the score of a player.
+/*
+  The PlayerScore class is used to represent the score of a single player during a game.
+  This class keep the number of cards, sum of cards and the number of wager cards a player has.
+  This class support getting the score of a player.
  */
 
 package com.example.gamescorecalculator.model;

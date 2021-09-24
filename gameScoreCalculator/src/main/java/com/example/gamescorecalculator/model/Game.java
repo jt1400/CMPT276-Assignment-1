@@ -1,8 +1,8 @@
-/**
- * The Game class represent one game played by 1 to 4 players.
- * This class use an ArrayList to store PlayerScores objects.
- * This support setting the number of player, adding player, getting the winner of the game
- * and reporting the summary of the game.
+/*
+  The Game class represent one game played by 1 to 4 players.
+  This class use an ArrayList to store PlayerScores objects.
+  This support setting the number of player, adding player, getting the winner of the game
+  and reporting the summary of the game.
  */
 
 package com.example.gamescorecalculator.model;

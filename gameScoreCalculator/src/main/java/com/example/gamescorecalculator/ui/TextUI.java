@@ -1,10 +1,11 @@
-/**The TextUI class is used to interact with the user by printing to the screen and reading from
- * the keyboard.
- * TextUI can show 4 menu choices, list game, add new game, delete game and exit.
- * User can choose a menu by entering a number.
- * Each time the user enters a number, if the number is out of range for that value then display
- * a message stating what values are allowed and re-ask for the value. Applies to menu
- * choices and entering values.
+/*
+  The TextUI class is used to interact with the user by printing to the screen and reading from
+  the keyboard.
+  TextUI can show 4 menu choices, list game, add new game, delete game and exit.
+  User can choose a menu by entering a number.
+  Each time the user enters a number, if the number is out of range for that value then display
+  a message stating what values are allowed and re-ask for the value. Applies to menu
+  choices and entering values.
  */
 
 package com.example.gamescorecalculator.ui;
