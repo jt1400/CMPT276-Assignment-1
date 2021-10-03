@@ -45,6 +45,15 @@ class PlayerScoreTest {
     }
 
     @Test
+    void testGetScoreWithOneCard(){
+        PlayerScore p = new PlayerScore();
+        p.setNumberOfCards(1);
+        p.setSumOfCards(1);
+        p.setNumberOfWagerCards(1);
+        assertEquals(-38, p.getScore());
+    }
+
+    @Test
     void testSetBadNumberOfCards(){
         PlayerScore p = new PlayerScore();
         assertThrows(IllegalArgumentException.class,
